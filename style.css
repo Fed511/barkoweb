@@ -1,6 +1,6 @@
-/* =========================
-   FONT
-   ========================= */
+/* =========================================================
+   BARKO — style.css
+   ========================================================= */
 
 @font-face {
     font-family: "BoldPixels";
@@ -11,26 +11,67 @@
 }
 
 
-/* =========================
-   RESET
-   ========================= */
+/* =========================================================
+   TOKEN
+   ========================================================= */
 
-* {
+:root {
+    --ink: #0b0710;
+    --paper: #ffffff;
+
+    --steam-a: #35657f;
+    --steam-b: #1b3a52;
+    --itch: #c33a3a;
+    --youtube: #c81111;
+    --spotify: #10814a;
+    --instagram-a: #8330a8;
+    --instagram-b: #bf2b62;
+
+    --border: 3px;
+    --radius: 16px;
+    --lift: 6px;
+
+    --col: 720px;
+
+    --shadow-hard: 0 var(--lift) 0 var(--ink);
+    --shadow-soft: 0 14px 26px rgba(0, 0, 0, 0.4);
+
+    --sticker:
+        drop-shadow(3px 4px 0 rgba(0, 0, 0, 0.32))
+        drop-shadow(0 10px 14px rgba(0, 0, 0, 0.28));
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
 html {
-    min-height: 100%;
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
 }
 
 body {
     position: relative;
+    isolation: isolate;
 
     min-height: 100vh;
-    padding: 40px 20px 24px;
+    min-height: 100svh;
+    padding: 0 clamp(16px, 4vw, 40px) clamp(20px, 3vh, 34px);
 
     display: flex;
     flex-direction: column;
@@ -38,515 +79,738 @@ body {
 
     overflow-x: hidden;
 
-    font-family: Arial, Helvetica, sans-serif;
-    color: #ffffff;
+    font-family: "BoldPixels", ui-monospace, "Courier New", monospace;
+    color: var(--paper);
+    background-color: #1d1526;
+}
 
-    background-image: url("assets/mgMenu.png");
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   SFONDO
+   Livello dedicato: l'immagine sotto, la vignettatura sopra.
+   Serve a far risaltare il testo senza spegnere il disegno.
+   ========================================================= */
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background-image: url("assets/bg-1280.jpg");
+    background-image: image-set(
+        url("assets/bg-1280.webp") type("image/webp"),
+        url("assets/bg-1280.jpg") type("image/jpeg")
+    );
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-attachment: fixed;
 }
 
-
-/* =========================
-   OSCURAMENTO DELLO SFONDO
-   ========================= */
-
-body::before {
+.backdrop::after {
     content: "";
 
-    position: fixed;
+    position: absolute;
     inset: 0;
-    z-index: 0;
 
-    background-color: rgba(0, 0, 0, 0.18);
+    background:
+        radial-gradient(
+            ellipse 80% 65% at 50% 45%,
+            rgba(12, 6, 20, 0.10) 0%,
+            rgba(12, 6, 20, 0.42) 55%,
+            rgba(12, 6, 20, 0.72) 100%
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(12, 6, 20, 0.30) 0%,
+            rgba(12, 6, 20, 0) 22%,
+            rgba(12, 6, 20, 0) 70%,
+            rgba(12, 6, 20, 0.45) 100%
+        );
+}
 
-    pointer-events: none;
+@media (min-width: 1281px) {
+    .backdrop {
+        background-image: url("assets/bg-1920.jpg");
+        background-image: image-set(
+            url("assets/bg-1920.webp") type("image/webp"),
+            url("assets/bg-1920.jpg") type("image/jpeg")
+        );
+    }
+}
+
+@media (max-width: 700px) {
+    .backdrop {
+        background-image: url("assets/bg-800.jpg");
+        background-image: image-set(
+            url("assets/bg-800.webp") type("image/webp"),
+            url("assets/bg-800.jpg") type("image/jpeg")
+        );
+    }
 }
 
 
-/* =========================
-   PERSONAGGI
-   ========================= */
+/* =========================================================
+   LA BAMBINA
+   Sta fuori dalla colonna dei contenuti, dal lato opposto
+   al cane: il cane cerca, lei è dall'altra parte della pagina.
+   ========================================================= */
 
-.corner-character {
-    position: fixed;
-    z-index: 2;
+.human {
+    position: absolute;
+    right: clamp(-14px, 1vw, 40px);
+    bottom: clamp(6px, 3vh, 40px);
+    z-index: 0;
 
     display: block;
-
-    width: auto;
-    height: auto;
-
-    object-fit: contain;
 
     pointer-events: none;
     user-select: none;
 
-    filter:
-        drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.35))
-        drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
+    filter: var(--sticker);
+    animation: sway 7s ease-in-out infinite alternate;
+}
+
+.human img {
+    width: auto;
+    height: clamp(150px, 34vh, 320px);
+}
+
+@keyframes sway {
+    from { transform: translateY(0)    rotate(-1.2deg); }
+    to   { transform: translateY(-8px) rotate(1.2deg); }
 }
 
 
-/* HumanMenu in alto a sinistra */
+/* =========================================================
+   COLONNA DEI CONTENUTI
+   ========================================================= */
 
-.human-image {
-    top: 18px;
-    left: 18px;
-
-    max-width: 210px;
-    max-height: 280px;
-}
-
-
-
-
-
-/* =========================
-   CONTENITORE PRINCIPALE
-   ========================= */
-
-.page-container {
-    position: relative;
-    z-index: 3;
-
+main {
     width: 100%;
-    max-width: 720px;
-    min-height: calc(100vh - 120px);
-
     display: flex;
     flex: 1;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 
-/* =========================
-   HERO
-   ========================= */
+/* La prima schermata: occupa esattamente l'altezza della finestra,
+   così la pagina si apre sempre sulla stessa inquadratura. */
 
-.hero {
+.screen {
+    position: relative;
+    z-index: 1;
+
     width: 100%;
-    margin-bottom: 34px;
-
-    text-align: center;
-}
-
-.title-row {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 18px;
-}
-
-.title-dog {
-    width: auto;
-    max-width: 190px;
-    max-height: 230px;
-
-    display: block;
-
-    object-fit: contain;
-
-    flex-shrink: 0;
-
-    filter:
-        drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.35))
-        drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
-}
-
-.title-image {
-    width: min(100%, 520px);
-    height: auto;
-
-    display: block;
-
-    object-fit: contain;
-
-    filter:
-        drop-shadow(4px 4px 0 rgba(86, 48, 141, 0.85))
-        drop-shadow(8px 8px 0 rgba(0, 0, 0, 0.45));
-}
-.game-description {
-    max-width: 660px;
-    margin: 28px auto 0;
-
-    font-family: "BoldPixels", monospace;
-    font-size: 32px;
-    font-weight: normal;
-    line-height: 1.35;
-    text-align: center;
-
-    color: #ffffff;
-
-    text-shadow:
-        3px 3px 0 #000000,
-        -1px -1px 0 #000000,
-        1px -1px 0 #000000,
-        -1px 1px 0 #000000;
-}
-
-
-/* =========================
-   CONTENITORE DEI PULSANTI
-   ========================= */
-
-.links-container {
-    width: 100%;
-    max-width: 520px;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: clamp(20px, 4vw, 48px) 0 clamp(16px, 3vh, 30px);
 
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-    gap: 14px;
+.page {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    max-width: var(--col);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(26px, 5vh, 46px);
 }
 
 
-/* =========================
-   PULSANTI
-   ========================= */
+/* Invito a scorrere */
 
-.link-button {
+.scroll-cue {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: clamp(-6px, 1vh, 10px);
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    color: rgba(255, 255, 255, 0.92);
+    font-size: clamp(11px, 1.1vw, 14px);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    background-color: rgba(12, 6, 20, 0.4);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.scroll-cue svg {
+    width: 15px;
+    height: 15px;
+    animation: nudge 1.9s ease-in-out infinite;
+}
+
+.scroll-cue:hover {
+    transform: translateY(3px);
+    background-color: rgba(12, 6, 20, 0.62);
+}
+
+.scroll-cue:focus-visible {
+    outline: 4px solid #ffe14d;
+    outline-offset: 4px;
+}
+
+@keyframes nudge {
+    0%, 60%, 100% { transform: translateY(0); }
+    30%           { transform: translateY(4px); }
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
     width: 100%;
-    min-height: 62px;
-    padding: 16px 24px;
+    text-align: center;
+}
 
+.titlecard {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border: 3px solid #ffffff;
+    gap: clamp(10px, 2.5vw, 26px);
+}
+
+.titlecard__dog {
+    flex-shrink: 0;
+    filter: var(--sticker);
+    animation: bob 3.4s ease-in-out infinite alternate;
+}
+
+.titlecard__dog img {
+    width: clamp(78px, 15vw, 190px);
+    height: auto;
+}
+
+.titlecard__logo {
+    filter:
+        drop-shadow(4px 4px 0 rgba(86, 48, 141, 0.85))
+        drop-shadow(8px 9px 0 rgba(0, 0, 0, 0.45));
+}
+
+.titlecard__logo img {
+    width: clamp(190px, 40vw, 500px);
+    height: auto;
+}
+
+@keyframes bob {
+    from { transform: translateY(3px)  rotate(-1deg); }
+    to   { transform: translateY(-6px) rotate(1.5deg); }
+}
+
+
+/* Tagline: pannello scuro sfocato, così il testo resta
+   leggibile sopra i pastelli senza coprire il disegno. */
+
+.tagline {
+    width: fit-content;
+    max-width: 100%;
+    margin: clamp(20px, 3.5vh, 34px) auto 0;
+    padding: clamp(10px, 1.6vh, 16px) clamp(16px, 3vw, 28px);
+
     border-radius: 14px;
 
-    color: #ffffff;
+    font-size: clamp(15px, 2.4vw, 28px);
+    line-height: 1.45;
+    text-wrap: balance;
 
-    font-family: "BoldPixels", monospace;
-    font-size: 24px;
-    font-weight: normal;
-    text-align: center;
+    background-color: rgba(12, 6, 20, 0.42);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    text-shadow:
+        2px 3px 0 rgba(0, 0, 0, 0.9),
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000;
+}
+
+
+/* =========================================================
+   LINK
+   Gerarchia: Steam è la destinazione principale,
+   il resto è un blocco secondario a due colonne.
+   ========================================================= */
+
+.links {
+    width: 100%;
+    max-width: 560px;
+
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 1.6vh, 16px);
+}
+
+.links__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(10px, 1.6vh, 16px);
+}
+
+
+/* =========================================================
+   PULSANTI
+   ========================================================= */
+
+.btn {
+    position: relative;
+
+    min-height: 58px;
+    padding: 14px 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    border: var(--border) solid var(--paper);
+    border-radius: var(--radius);
+
+    color: var(--paper);
     text-decoration: none;
-    text-transform: uppercase;
 
-    box-shadow:
-        0 6px 0 #09060d,
-        0 12px 22px rgba(0, 0, 0, 0.38);
+    /* <button> non eredita il font: senza questo "Send" esce col font di sistema */
+    font: inherit;
+    background-color: transparent;
+    cursor: pointer;
+
+    box-shadow: var(--shadow-hard), var(--shadow-soft);
 
     transition:
-        transform 150ms ease,
-        box-shadow 150ms ease,
-        filter 150ms ease;
+        transform 160ms ease,
+        box-shadow 160ms ease,
+        filter 160ms ease;
 }
 
-.link-button:hover {
-    transform: translateY(-4px);
-
-    filter: brightness(1.15);
-
-    box-shadow:
-        0 10px 0 #09060d,
-        0 18px 28px rgba(0, 0, 0, 0.48);
+.btn__icon {
+    width: 1.35em;
+    height: 1.35em;
+    flex-shrink: 0;
+    opacity: 0.95;
 }
 
-.link-button:active {
-    transform: translateY(4px);
-
-    box-shadow:
-        0 2px 0 #09060d,
-        0 6px 12px rgba(0, 0, 0, 0.35);
+.btn__label {
+    font-size: clamp(14px, 1.6vw, 19px);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    padding-top: 0.15em; /* compensa la baseline del font pixel */
 }
 
-.link-button:focus-visible {
-    outline: 4px solid #ffffff;
+.btn:hover {
+    transform: translateY(-4px) rotate(0deg);
+    filter: brightness(1.12);
+    box-shadow: 0 10px 0 var(--ink), 0 20px 30px rgba(0, 0, 0, 0.48);
+}
+
+.btn:active {
+    transform: translateY(4px) rotate(0deg);
+    box-shadow: 0 2px 0 var(--ink), 0 6px 12px rgba(0, 0, 0, 0.35);
+}
+
+.btn:focus-visible {
+    outline: 4px solid #ffe14d;
     outline-offset: 5px;
 }
 
 
-/* =========================
-   COLORI DEI PULSANTI
-   ========================= */
+/* Il pulsante principale */
 
-.steam-button {
-    background-color: #173b59;
+.btn--primary {
+    min-height: 76px;
+    gap: 16px;
+
+    background-image: linear-gradient(160deg, var(--steam-a), var(--steam-b));
 }
 
-.spotify-button {
-    background-color: #167d3c;
+.btn--primary .btn__icon {
+    width: 1.7em;
+    height: 1.7em;
+    opacity: 1;
 }
 
-.youtube-button {
-    background-color: #b52020;
-}
-
-.instagram-button {
-    background-color: #9d2768;
-}
-
-.itch-button {
-    background-color: #b64545;
+.btn--primary .btn__label {
+    font-size: clamp(19px, 2.4vw, 27px);
 }
 
 
-/* =========================
+/* Leggera rotazione "adesivo": ogni pulsante è appiccicato
+   storto, come su un quaderno. */
+
+.btn--itch      { background-color: var(--itch);    transform: rotate(-0.7deg); }
+.btn--youtube   { background-color: var(--youtube); transform: rotate(0.6deg); }
+.btn--spotify   { background-color: var(--spotify); transform: rotate(0.5deg); }
+.btn--instagram { transform: rotate(-0.6deg);
+    background-image: linear-gradient(135deg, var(--instagram-a), var(--instagram-b));
+}
+
+
+/* =========================================================
+   BOX MESSAGGI
+   ========================================================= */
+
+.contact {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    padding: clamp(16px, 4vh, 40px) 0 clamp(30px, 6vh, 64px);
+
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 100%;
+    max-width: 620px;
+    padding: clamp(20px, 4vw, 36px);
+
+    border: var(--border) solid var(--paper);
+    border-radius: 22px;
+
+    background-color: rgba(12, 6, 20, 0.62);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+
+    box-shadow: var(--shadow-hard), var(--shadow-soft);
+}
+
+.card--center {
+    text-align: center;
+}
+
+.card__actions {
+    margin-top: 22px;
+}
+
+.btn--narrow {
+    max-width: 260px;
+    margin-inline: auto;
+}
+
+.card__title {
+    font-size: clamp(20px, 3vw, 30px);
+    font-weight: normal;
+    line-height: 1.2;
+
+    text-shadow: 2px 3px 0 rgba(0, 0, 0, 0.75);
+}
+
+.card__hint {
+    margin-top: 8px;
+
+    font-size: clamp(12px, 1.4vw, 15px);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+
+/* Campi */
+
+.form {
+    margin-top: clamp(18px, 3vh, 26px);
+
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2vh, 18px);
+}
+
+.form__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(12px, 2vh, 18px);
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.field label {
+    font-size: clamp(11px, 1.2vw, 13px);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+
+    text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.65);
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 12px 14px;
+
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+
+    /* 16px evita lo zoom automatico di Safari su iPhone */
+    font-family: ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #17101f;
+
+    background-color: rgba(255, 255, 255, 0.95);
+
+    transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.field textarea {
+    min-height: 118px;
+    resize: vertical;
+}
+
+.field select {
+    appearance: none;
+    -webkit-appearance: none;
+
+    padding-right: 40px;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317101f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 13px center;
+    background-size: 17px;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+    color: #6b6076;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: #ffe14d;
+    box-shadow: 0 0 0 4px rgba(255, 225, 77, 0.45);
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+    outline: 3px solid #ffe14d;
+    outline-offset: 2px;
+}
+
+
+/* Trappola antispam */
+
+.honeypot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+
+/* Pulsante di invio */
+
+.btn--send {
+    margin-top: 4px;
+    background-image: linear-gradient(150deg, #7a3bb8, #4a2478);
+}
+
+.btn--send[disabled] {
+    cursor: progress;
+    filter: saturate(0.55);
+    transform: none;
+}
+
+
+.form__note {
+    font-family: ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form__status {
+    margin-top: -4px;
+
+    font-size: clamp(12px, 1.3vw, 14px);
+    line-height: 1.5;
+    text-align: center;
+}
+
+.form__status:empty {
+    display: none;
+}
+
+.form__status.is-ok {
+    color: #8ff0ae;
+    text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.7);
+}
+
+.form__status.is-error {
+    color: #ffc9c9;
+    text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================================================
    FOOTER
-   ========================= */
+   ========================================================= */
 
 .footer {
     position: relative;
-    z-index: 3;
+    z-index: 1;
 
     width: 100%;
-    margin-top: 30px;
-
     text-align: center;
 }
 
 .footer p {
-    font-family: "BoldPixels", monospace;
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: clamp(11px, 1.1vw, 14px);
+    letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.85);
 
-    color: #ffffff;
-
-    text-shadow:
-        2px 2px 0 #000000,
-        -1px -1px 0 #000000;
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
 }
 
 
-/* =========================
-   SCHERMI MEDI
-   ========================= */
+/* =========================================================
+   SCHERMI STRETTI
+   ========================================================= */
 
-@media (max-width: 1100px) {
-    .human-image {
-        max-width: 160px;
-        max-height: 210px;
-    }
-
-    .dog-image {
-        max-width: 185px;
-        max-height: 220px;
-    }
-
-    .page-container {
-        max-width: 620px;
-    }
-
-    .title-image {
-        max-width: 440px;
-    }
-
-    .game-description {
-        max-width: 560px;
-
-        font-size: 24px;
-    }
-
-    .title-row {
-    gap: 12px;
-}
-
-.title-dog {
-    max-width: 120px;
-    max-height: 155px;
-}
-}
-
-
-/* =========================
-   TABLET
-   ========================= */
-
-@media (max-width: 800px) {
+@media (max-width: 620px) {
     body {
-        padding-right: 16px;
-        padding-left: 16px;
+        padding-top: 26px;
+        padding-bottom: 26px;
+        gap: 22px;
     }
 
-    .human-image {
-        top: 12px;
-        left: 12px;
-
-        max-width: 120px;
-        max-height: 160px;
+    .human {
+        right: 2px;
     }
 
-    .dog-image {
-        bottom: 12px;
-        left: 12px;
-
-        max-width: 135px;
-        max-height: 165px;
+    .human img {
+        height: clamp(120px, 22vh, 190px);
+        opacity: 0.92;
     }
 
-    .page-container {
-        max-width: 520px;
+    .btn {
+        min-height: 52px;
+        padding: 12px 10px;
+        gap: 9px;
     }
 
-    .title-image {
-        max-width: 370px;
+    .btn--primary {
+        min-height: 66px;
     }
 
-    .links-container {
-        max-width: 430px;
-    }
-}
-
-
-/* =========================
-   TELEFONO
-   ========================= */
-
-@media (max-width: 600px) {
-    body {
-        min-height: 100svh;
-        padding: 18px 14px;
-
-        background-attachment: scroll;
-    }
-.title-row {
-    gap: 8px;
-}
-
-.title-dog {
-    max-width: 85px;
-    max-height: 110px;
-}
-
-.title-image {
-    width: min(100%, 255px);
-}
-    .page-container {
-        min-height: auto;
-        padding-top: 95px;
-        padding-bottom: 105px;
-
-        justify-content: flex-start;
-    }
-
-    .human-image {
-        top: 8px;
-        left: 8px;
-
-        max-width: 90px;
-        max-height: 110px;
-    }
-
-    .dog-image {
-        bottom: 8px;
-        left: 8px;
-
-        max-width: 100px;
-        max-height: 120px;
-    }
-
-    .hero {
-        margin-bottom: 26px;
-    }
-
-    .title-image {
-        max-width: 300px;
-    }
-
-    .game-description {
-        max-width: 350px;
-        margin-top: 20px;
-
-        font-size: 16px;
-        line-height: 1.5;
-    }
-
-    .links-container {
-        max-width: 360px;
-
-        gap: 12px;
-    }
-
-    .link-button {
-        min-height: 54px;
-        padding: 14px 16px;
-
-        font-size: 16px;
-    }
-
-    .footer {
-        margin-top: 20px;
-        padding-left: 90px;
-    }
-
-    .footer p {
-        font-size: 12px;
-    }
-}
-
-
-/* =========================
-   TELEFONI MOLTO PICCOLI
-   ========================= */
-
-@media (max-width: 380px) {
-    .page-container {
-        padding-top: 80px;
-        padding-bottom: 90px;
-    }
-.title-row {
-    gap: 5px;
-}
-
-.title-dog {
-    max-width: 68px;
-    max-height: 90px;
-}
-
-.title-image {
-    width: min(100%, 210px);
-}
-    .human-image {
-        max-width: 72px;
-    }
-
-    .dog-image {
-        max-width: 80px;
-    }
-
-    .title-image {
-        max-width: 245px;
-    }
-
-    .game-description {
-        max-width: 290px;
-
+    .btn__label {
         font-size: 14px;
     }
 
-    .link-button {
-        min-height: 50px;
-
-        font-size: 14px;
+    .btn--primary .btn__label {
+        font-size: 19px;
     }
 
-    .footer {
-        padding-left: 70px;
+    .tagline {
+        font-size: 15px;
+    }
+
+    /* Un campo per riga: due colonne su telefono sono strette */
+    .form__row {
+        grid-template-columns: 1fr;
+    }
+
+    /* La bambina resta dietro al contenuto, non davanti ai pulsanti */
+    .human {
+        bottom: 0;
     }
 }
 
 
-/* =========================
+/* Sotto i 340 px le due colonne diventano scomode */
+
+@media (max-width: 339px) {
+    .links__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .human img {
+        height: 115px;
+    }
+}
+
+
+/* Schermi molto grandi: la composizione respira di più */
+
+@media (min-width: 1600px) and (min-height: 900px) {
+    .titlecard__dog img  { width: 220px; }
+    .titlecard__logo img { width: 580px; }
+    .tagline             { font-size: 31px; }
+    .links               { max-width: 620px; }
+    .human img           { height: min(38vh, 380px); }
+}
+
+
+/* Schermi bassi e larghi (es. laptop 1280×720) */
+
+@media (max-height: 780px) and (min-width: 621px) {
+    .titlecard__dog img { width: clamp(70px, 11vw, 140px); }
+    .titlecard__logo img { width: clamp(180px, 30vw, 380px); }
+    .btn--primary { min-height: 64px; }
+    .btn { min-height: 50px; }
+}
+
+
+/* =========================================================
    ACCESSIBILITÀ
-   ========================= */
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
     }
 
-    .link-button {
-        transition: none;
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+@media (prefers-contrast: more) {
+    .backdrop::after {
+        background: rgba(12, 6, 20, 0.72);
+    }
+
+    .tagline {
+        background-color: rgba(12, 6, 20, 0.8);
     }
 }

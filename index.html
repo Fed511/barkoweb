@@ -2,115 +2,243 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <!-- Content-Security-Policy: la pagina può caricare risorse solo da
+         se stessa e parlare via rete solo con FormSubmit. Niente script
+         inline, niente plugin, niente richieste verso altri host. -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'none';
+        script-src 'self';
+        style-src 'self';
+        img-src 'self' data:;
+        font-src 'self';
+        connect-src https://formsubmit.co;
+        form-action https://formsubmit.co;
+        base-uri 'none';
+        object-src 'none';
+        manifest-src 'self';
+        upgrade-insecure-requests;
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
-    <meta
-        name="description"
-        content="BARKO is a strange little adventure about a dog searching for his human."
-    >
+    <title>BARKO — a strange little adventure about a dog searching for his human</title>
 
-    <title>BARKO - Official Website</title>
+    <meta name="description" content="BARKO is a strange little adventure about a dog searching for his human. Follow the game on Steam, itch.io, YouTube, Spotify and Instagram.">
+    <meta name="theme-color" content="#1d1526">
+    <link rel="canonical" href="https://barko.io/">
 
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BARKO">
+    <meta property="og:title" content="BARKO">
+    <meta property="og:description" content="A strange little adventure about a dog searching for his human.">
+    <meta property="og:url" content="https://barko.io/">
+    <meta property="og:image" content="https://barko.io/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="BARKO — a dog drawn in crayon next to the game logo.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BARKO">
+    <meta name="twitter:description" content="A strange little adventure about a dog searching for his human.">
+    <meta name="twitter:image" content="https://barko.io/assets/og-image.jpg">
+
+    <!-- Icons -->
+    <link rel="icon" href="assets/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+    <!-- Priority resources -->
+    <link rel="preload" href="assets/fonts/BoldPixels.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="assets/title.webp" as="image" type="image/webp" fetchpriority="high">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="assets/tabImg.png">
 </head>
 
 <body>
 
-    <!-- Personaggio in alto a sinistra -->
-    <img
-        class="corner-character human-image"
-        src="assets/humanMenu.png"
-        alt="The human"
-    >
+    <!-- Decorative background layers -->
+    <div class="backdrop" aria-hidden="true"></div>
 
-    <main class="page-container">
+    <main>
 
-   <section class="hero">
+    <section class="screen">
 
-    <div class="title-row">
+    <!-- The human BARKO is looking for -->
+    <picture class="human" aria-hidden="true">
+        <source srcset="assets/human.webp" type="image/webp">
+        <img src="assets/human.png" alt="" width="420" height="1078" loading="lazy" decoding="async">
+    </picture>
 
-        <img
-            class="title-dog"
-            src="assets/dogMenu.png"
-            alt="BARKO, the dog protagonist"
-        >
+    <div class="page">
 
-        <img
-            class="title-image"
-            src="assets/titleMenu.png"
-            alt="BARKO"
-        >
+        <section class="hero">
+
+            <h1 class="visually-hidden">BARKO</h1>
+
+            <div class="titlecard">
+                <picture class="titlecard__dog">
+                    <source srcset="assets/dog.webp" type="image/webp">
+                    <img src="assets/dog.png" alt="BARKO, the dog you play as" width="480" height="431" fetchpriority="high" decoding="async">
+                </picture>
+
+                <picture class="titlecard__logo">
+                    <source srcset="assets/title.webp" type="image/webp">
+                    <img src="assets/title.png" alt="BARKO" width="1100" height="373" fetchpriority="high" decoding="async">
+                </picture>
+            </div>
+
+            <p class="tagline">
+                A strange little adventure about a dog<br>
+                searching for his human.
+            </p>
+
+        </section>
+
+        <nav class="links" aria-label="Official BARKO links">
+
+            <a class="btn btn--primary" href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer">
+                <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                    <path d="M11.98 2A10.02 10.02 0 0 0 2 11.19l5.36 2.21a2.83 2.83 0 0 1 1.6-.49l2.39-3.46v-.05a3.78 3.78 0 1 1 3.78 3.78h-.09l-3.41 2.43v.2a2.84 2.84 0 0 1-5.61.6l-3.83-1.59A10.02 10.02 0 1 0 11.98 2Zm-4.6 13.17 1.23.51a2.15 2.15 0 1 0 1.2-2.9l1.27.53a1.58 1.58 0 1 1-1.22 2.92l-2.48-1.06Zm7.75-8.24a2.52 2.52 0 1 0 0 5.04 2.52 2.52 0 0 0 0-5.04Zm0 .63a1.89 1.89 0 1 1 0 3.78 1.89 1.89 0 0 1 0-3.78Z"/>
+                </svg>
+                <span class="btn__label">Steam</span>
+            </a>
+
+            <div class="links__grid">
+
+                <a class="btn btn--itch" href="https://itch.io/" target="_blank" rel="noopener noreferrer">
+                    <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <path d="M7.5 8h9a4 4 0 0 1 3.9 3.1l1 4.3A3.1 3.1 0 0 1 15.9 17l-1-1.2h-5.8L8 17a3.1 3.1 0 0 1-5.5-1.6l1-4.3A4 4 0 0 1 7.5 8Z"/>
+                        <path d="M7 11.5v2M6 12.5h2"/>
+                        <path d="M16 11.6h.01M17.6 13.2h.01"/>
+                    </svg>
+                    <span class="btn__label">itch.io</span>
+                </a>
+
+                <a class="btn btn--youtube" href="https://www.youtube.com/watch?v=PpvR8DuKXig" target="_blank" rel="noopener noreferrer">
+                    <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path d="M23.5 6.9a3.02 3.02 0 0 0-2.12-2.14C19.5 4.25 12 4.25 12 4.25s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.9C0 8.79 0 12 0 12s0 3.21.5 5.1a3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14C24 15.21 24 12 24 12s0-3.21-.5-5.1ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/>
+                    </svg>
+                    <span class="btn__label">YouTube</span>
+                </a>
+
+                <a class="btn btn--spotify" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">
+                    <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.59 14.43a.75.75 0 0 1-1.03.25c-2.82-1.72-6.36-2.11-10.54-1.16a.75.75 0 1 1-.33-1.46c4.56-1.04 8.48-.59 11.64 1.34.35.22.47.68.26 1.03Zm1.22-2.72a.94.94 0 0 1-1.29.31c-3.23-1.98-8.15-2.56-11.96-1.4a.94.94 0 1 1-.55-1.79c4.36-1.32 9.78-.68 13.49 1.6.44.27.58.85.31 1.28Zm.11-2.84C14.05 8.57 7.6 8.36 3.9 9.49a1.12 1.12 0 1 1-.65-2.15C7.5 6.05 14.62 6.3 18.98 8.89a1.12 1.12 0 1 1-1.15 1.93l.09.05Z"/>
+                    </svg>
+                    <span class="btn__label">Spotify</span>
+                </a>
+
+                <a class="btn btn--instagram" href="https://www.instagram.com/feddd511/" target="_blank" rel="noopener noreferrer">
+                    <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true" focusable="false">
+                        <rect x="2.9" y="2.9" width="18.2" height="18.2" rx="5.4"/>
+                        <circle cx="12" cy="12" r="4.3"/>
+                        <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span class="btn__label">Instagram</span>
+                </a>
+
+            </div>
+
+        </nav>
+
+        <a class="scroll-cue" href="#contact">
+            <span>Write to me</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M12 5v13M6 13l6 6 6-6"/>
+            </svg>
+        </a>
 
     </div>
 
-    <p class="game-description">
-        A strange little adventure about a dog searching for his human.
-    </p>
+    </section>
 
-</section>
 
-        <nav
-            class="links-container"
-            aria-label="Official BARKO links"
-        >
+    <!-- =====================================================
+         MESSAGGI
+         L'indirizzo di destinazione non compare da nessuna
+         parte: FormSubmit lo tiene dietro al codice anonimo
+         qui sotto in action="".
+         ===================================================== -->
 
-            <a
-                class="link-button steam-button"
-                href="https://store.steampowered.com/"
-                target="_blank"
-                rel="noopener noreferrer"
+    <section class="contact" id="contact">
+
+        <div class="card">
+
+            <h2 class="card__title">Write to BARKO</h2>
+            <p class="card__hint">Bugs, questions, or just to say hi. I read everything.</p>
+
+            <form
+                class="form"
+                id="contact-form"
+                action="https://formsubmit.co/PASTE-YOUR-FORMSUBMIT-CODE-HERE"
+                method="POST"
             >
-                Steam
-            </a>
 
-            <a
-                class="link-button spotify-button"
-                href="https://open.spotify.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Spotify
-            </a>
+                <!-- Impostazioni FormSubmit -->
+                <input type="hidden" name="_subject" value="New message from barko.io">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://barko.io/thanks.html">
 
-            <a
-                class="link-button youtube-button"
-                href="https://www.youtube.com/watch?v=PpvR8DuKXig"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                YouTube
-            </a>
+                <!-- Trappola antispam: invisibile agli umani, i bot la compilano -->
+                <div class="honeypot" aria-hidden="true">
+                    <label for="company">Leave this field empty</label>
+                    <input type="text" id="company" name="_honey" tabindex="-1" autocomplete="off">
+                </div>
 
-            <a
-                class="link-button instagram-button"
-                href="https://www.instagram.com/feddd511/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Instagram
-            </a>
+                <div class="form__row">
+                    <div class="field">
+                        <label for="name">Your name</label>
+                        <input type="text" id="name" name="name" required maxlength="80" autocomplete="name" placeholder="Who's writing?">
+                    </div>
 
-            <a
-                class="link-button itch-button"
-                href="https://itch.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                itch.io
-            </a>
+                    <div class="field">
+                        <label for="email">Your email</label>
+                        <input type="email" id="email" name="email" required maxlength="120" autocomplete="email" placeholder="So I can reply">
+                    </div>
+                </div>
 
-        </nav>
+                <div class="field">
+                    <label for="topic">What about?</label>
+                    <select id="topic" name="topic">
+                        <option value="Just saying hi">Just saying hi</option>
+                        <option value="Bug report">I found a bug</option>
+                        <option value="Press / content creator">Press &amp; content creators</option>
+                        <option value="Business / collaboration">Business &amp; collaborations</option>
+                        <option value="Something else">Something else</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="message">Your message</label>
+                    <textarea id="message" name="message" rows="5" required maxlength="3000" placeholder="Say anything."></textarea>
+                </div>
+
+                <button class="btn btn--send" type="submit">
+                    <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <path d="M3.4 3.6 21 12 3.4 20.4l2.3-8.4-2.3-8.4Z"/>
+                        <path d="M5.7 12H21"/>
+                    </svg>
+                    <span class="btn__label" data-idle="Send">Send</span>
+                </button>
+
+                <p class="form__note">Your email is only used to reply. Nothing else, ever.</p>
+
+                <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+
+            </form>
+
+        </div>
+
+    </section>
 
     </main>
 
     <footer class="footer">
         <p>© 2026 BARKO. All rights reserved.</p>
     </footer>
+
+
+    <script src="app.js" defer></script>
 
 </body>
 </html>

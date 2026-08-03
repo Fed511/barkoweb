@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'none';
+        style-src 'self';
+        img-src 'self' data:;
+        font-src 'self';
+        base-uri 'none';
+        object-src 'none';
+        upgrade-insecure-requests;
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <title>Message sent — BARKO</title>
+
+    <meta name="description" content="Your message to BARKO has been sent.">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#1d1526">
+
+    <link rel="icon" href="assets/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="backdrop" aria-hidden="true"></div>
+
+    <main>
+
+    <section class="screen">
+
+        <div class="page">
+
+            <picture class="titlecard__dog">
+                <source srcset="assets/dog.webp" type="image/webp">
+                <img src="assets/dog.png" alt="BARKO, the dog" width="480" height="431" decoding="async">
+            </picture>
+
+            <div class="card card--center">
+                <h1 class="card__title">Message sent</h1>
+                <p class="card__hint">Thanks for writing. I'll get back to you as soon as I can.</p>
+
+                <p class="card__actions">
+                    <a class="btn btn--send btn--narrow" href="/">
+                        <span class="btn__label">Back to BARKO</span>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 BARKO. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

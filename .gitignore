@@ -1,0 +1,8 @@
+# File di attivazione del modulo: contiene l'indirizzo email in chiaro.
+# Serve solo in locale, non deve finire online.
+ATTIVAZIONE-FORM.html
+
+# Robaccia di sistema
+.DS_Store
+Thumbs.db
+desktop.ini
