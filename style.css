@@ -242,13 +242,15 @@ main {
     align-items: center;
     gap: 8px;
 
+    min-height: 44px;              /* area toccabile piena su telefono */
     margin-top: clamp(-6px, 1vh, 10px);
-    padding: 8px 14px;
+    padding: 10px 20px;
 
+    border: 2px solid rgba(255, 255, 255, 0.75);
     border-radius: 999px;
 
-    color: rgba(255, 255, 255, 0.92);
-    font-size: clamp(11px, 1.1vw, 14px);
+    color: #ffffff;
+    font-size: clamp(12px, 1.1vw, 14px);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     text-decoration: none;
@@ -268,7 +270,8 @@ main {
 
 .scroll-cue:hover {
     transform: translateY(3px);
-    background-color: rgba(12, 6, 20, 0.62);
+    border-color: #ffffff;
+    background-color: rgba(12, 6, 20, 0.72);
 }
 
 .scroll-cue:focus-visible {
@@ -556,7 +559,8 @@ main {
 }
 
 .field label {
-    font-size: clamp(11px, 1.2vw, 13px);
+    /* minimo 13px: sotto, il font a pixel diventa faticoso su telefono */
+    font-size: clamp(13px, 1.2vw, 14px);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.9);
@@ -692,7 +696,7 @@ main {
 }
 
 .footer p {
-    font-size: clamp(11px, 1.1vw, 14px);
+    font-size: clamp(12px, 1.1vw, 14px);
     letter-spacing: 0.03em;
     color: rgba(255, 255, 255, 0.85);
 
@@ -754,15 +758,32 @@ main {
 }
 
 
-/* Sotto i 340 px le due colonne diventano scomode */
+/* Telefoni molto stretti: restiamo su due colonne — impilare i cinque
+   pulsanti spingerebbe l'invito a scorrere sotto il bordo dello schermo. */
 
-@media (max-width: 339px) {
+@media (max-width: 349px) {
+    .btn {
+        padding: 12px 6px;
+        gap: 7px;
+    }
+
+    .btn__label {
+        font-size: 12px;
+        letter-spacing: 0.02em;
+    }
+
+    .btn__icon {
+        width: 1.2em;
+        height: 1.2em;
+    }
+
+    .links,
     .links__grid {
-        grid-template-columns: 1fr;
+        gap: 9px;
     }
 
     .human img {
-        height: 115px;
+        height: 105px;
     }
 }
 
@@ -785,6 +806,49 @@ main {
     .titlecard__logo img { width: clamp(180px, 30vw, 380px); }
     .btn--primary { min-height: 64px; }
     .btn { min-height: 50px; }
+}
+
+
+/* =========================================================
+   TELEFONO IN ORIZZONTALE
+   Poca altezza e molta larghezza: la prima schermata passa
+   su due colonne invece di allungarsi e finire tagliata.
+   Va dopo il blocco qui sopra: quello copre anche i telefoni
+   in orizzontale, quindi queste misure devono vincere.
+   ========================================================= */
+
+@media (max-height: 560px) and (min-width: 620px) and (orientation: landscape) {
+
+    .page {
+        max-width: 980px;
+
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+        align-items: center;
+        gap: clamp(20px, 3vw, 44px) clamp(18px, 3vw, 40px);
+    }
+
+    .hero        { grid-column: 1; }
+    .links       { grid-column: 2; max-width: none; }
+    .scroll-cue  { grid-column: 1 / -1; justify-self: center; }
+
+    .titlecard__dog img  { width: clamp(58px, 8vw, 100px); }
+    .titlecard__logo img { width: clamp(150px, 24vw, 290px); }
+
+    .tagline {
+        margin-top: 14px;
+        padding: 8px 14px;
+        font-size: clamp(12px, 1.6vw, 16px);
+    }
+
+    .btn          { min-height: 44px; }
+    .btn--primary { min-height: 54px; }
+    .btn--primary .btn__label { font-size: 18px; }
+
+    /* Non c'è spazio laterale: la bambina resta fuori */
+    .human { display: none; }
+
+    .contact { padding-top: 34px; }
 }
 
 
