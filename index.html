@@ -153,6 +153,320 @@
 
 
     <!-- =====================================================
+         GALLERIA
+         Tredici schermate 16:9. Ogni riquadro è soltanto un
+         link all'immagine grande: senza JavaScript funziona
+         lo stesso, il browser la apre in una scheda nuova.
+         Con JavaScript app.js costruisce un <dialog> nativo
+         e mostra la stessa immagine qui dentro.
+
+         La prima occupa la riga intera (grid-column: 1 / -1).
+         Non è decorazione: le altre dodici si dividono esatte
+         in 4 righe da 3, 6 da 2 o 12 da 1, quindi nessuna riga
+         resta monca a nessuna larghezza. E "1 / -1" su una
+         griglia a colonna singola vale una colonna sola, così
+         non può inventare una seconda colonna implicita e far
+         scorrere la pagina di lato.
+         ===================================================== -->
+
+    <section class="shots" id="shots" aria-labelledby="shots-title">
+
+        <div class="shots__head">
+            <h2 class="shots__title" id="shots-title">Thirteen pieces of BARKO</h2>
+            <p class="shots__hint">Thirteen pictures from the game. Open one to see it full size.</p>
+        </div>
+
+        <ul class="shots__grid" id="shots-grid" role="list">
+
+            <li class="shots__cell shots__cell--lead">
+                <a class="shot" href="assets/shots/01-menu-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="The menu — Continue, New Game, Settings, Quit. Four ways into the same walk.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/01-menu-640.webp 640w, assets/shots/01-menu-1280.webp 1280w, assets/shots/01-menu-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 1240px, (min-width: 901px) 1030px, (min-width: 621px) 90vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/01-menu-640.jpg"
+                             srcset="assets/shots/01-menu-640.jpg 640w, assets/shots/01-menu-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 1240px, (min-width: 901px) 1030px, (min-width: 621px) 90vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="The BARKO title screen, drawn in crayon on white paper: the logo in fat coloured letters, a black and white dog with its paws up, a grinning red sun, a girl in a pink dress at the top left, and the menu down the side — Continue, New Game, Settings, Quit.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">01</span>
+                        <span class="shot__name">The menu</span>
+                        <span class="visually-hidden">— open full size, picture 1 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/02-crayon-world-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="Outside — a fence, some apple trees, and a smell worth following.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/02-crayon-world-640.webp 640w, assets/shots/02-crayon-world-1280.webp 1280w, assets/shots/02-crayon-world-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/02-crayon-world-640.jpg"
+                             srcset="assets/shots/02-crayon-world-640.jpg 640w, assets/shots/02-crayon-world-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="An outdoor level drawn entirely in crayon: a wooden picket fence, rows of apple trees heavy with red and yellow apples, thick scribbled bushes, and the dog standing small in the green.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">02</span>
+                        <span class="shot__name">Outside</span>
+                        <span class="visually-hidden">— open full size, picture 2 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/03-kennel-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="The kennel — red bricks, an old dog bed, and a sign that says Safe place.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/03-kennel-640.webp 640w, assets/shots/03-kennel-1280.webp 1280w, assets/shots/03-kennel-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/03-kennel-640.jpg"
+                             srcset="assets/shots/03-kennel-640.jpg 640w, assets/shots/03-kennel-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="Red brick platforms stacked in a dark industrial room full of pipes and machinery. The dog stands on a high ledge; below on the right sits a pink dog bed with a label reading Safe place.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">03</span>
+                        <span class="shot__name">The kennel</span>
+                        <span class="visually-hidden">— open full size, picture 3 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/04-ducklings-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="Ducklings — nothing happens here. Press E when you can bear to leave.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/04-ducklings-640.webp 640w, assets/shots/04-ducklings-1280.webp 1280w, assets/shots/04-ducklings-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/04-ducklings-640.jpg"
+                             srcset="assets/shots/04-ducklings-640.jpg 640w, assets/shots/04-ducklings-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="Two crayon ducklings standing on a mound of green grass under a flat blue sky. One is a plain yellow duckling; the other has enormous googly eyes and a long beak. A small prompt at the bottom reads Press E to stop watching.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">04</span>
+                        <span class="shot__name">Ducklings</span>
+                        <span class="visually-hidden">— open full size, picture 4 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/05-tutor-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="The Tutor — a german shepherd in sunglasses, asking why you didn't fight.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/05-tutor-640.webp 640w, assets/shots/05-tutor-1280.webp 1280w, assets/shots/05-tutor-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/05-tutor-640.jpg"
+                             srcset="assets/shots/05-tutor-640.jpg 640w, assets/shots/05-tutor-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="A dark boiler room of pipes, chains, hanging lamps and a punchbag. A german shepherd in sunglasses and a cap stands on a wooden platform facing the dog, with a dialogue box open below reading: Yo, dude. Why didn't you fight him?">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">05</span>
+                        <span class="shot__name">The Tutor</span>
+                        <span class="visually-hidden">— open full size, picture 5 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/06-portals-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="The portals — blue goes somewhere. Pink goes somewhere else.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/06-portals-640.webp 640w, assets/shots/06-portals-1280.webp 1280w, assets/shots/06-portals-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/06-portals-640.jpg"
+                             srcset="assets/shots/06-portals-640.jpg 640w, assets/shots/06-portals-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="Round pale sci-fi platforms floating over a dark blue starry background. The dog stands in the middle of the largest one, between a blue flame portal and a pink flame portal; a Safe place dog bed sits on a platform below.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">06</span>
+                        <span class="shot__name">The portals</span>
+                        <span class="visually-hidden">— open full size, picture 6 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/07-angel-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="Angel — two rings of orange light that would rather you left.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/07-angel-640.webp 640w, assets/shots/07-angel-1280.webp 1280w, assets/shots/07-angel-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/07-angel-640.jpg"
+                             srcset="assets/shots/07-angel-640.jpg 640w, assets/shots/07-angel-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="Boss fight against Angel. A white winged creature with a halo hovers above a dark arena ringed with coloured crayon scribbles; two glowing orange rings sweep across the fighting box below. Angel's health bar reads 84 of 85.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">07</span>
+                        <span class="shot__name">Angel</span>
+                        <span class="visually-hidden">— open full size, picture 7 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/08-angel-trial-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="Angel's trial — ten questions, and no way to punch your way out of them.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/08-angel-trial-640.webp 640w, assets/shots/08-angel-trial-1280.webp 1280w, assets/shots/08-angel-trial-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/08-angel-trial-640.jpg"
+                             srcset="assets/shots/08-angel-trial-640.jpg 640w, assets/shots/08-angel-trial-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="A quiz screen over soft pink and grey clouds. The question reads: The alchemists chased one substance above all others. What was it called? Three answers are offered — The Emerald Tablet, The Philosopher's Stone, The Fifth Element. Angel hovers at the right with a counter showing 5 of 10.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">08</span>
+                        <span class="shot__name">Angel's trial</span>
+                        <span class="visually-hidden">— open full size, picture 8 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/09-birbion-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="Birbion — a bearded fairy. He drops pizzas. Don't catch them.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/09-birbion-640.webp 640w, assets/shots/09-birbion-1280.webp 1280w, assets/shots/09-birbion-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/09-birbion-640.jpg"
+                             srcset="assets/shots/09-birbion-640.jpg 640w, assets/shots/09-birbion-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="Boss fight against Birbion. A bearded man in a pink dress with fairy wings hovers above the arena, dropping whole pizzas into the fighting box below. His health bar reads 37 of 37.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">09</span>
+                        <span class="shot__name">Birbion</span>
+                        <span class="visually-hidden">— open full size, picture 9 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/10-conductor-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="The Conductor — a ghost with a baton, and a stave full of trouble.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/10-conductor-640.webp 640w, assets/shots/10-conductor-1280.webp 1280w, assets/shots/10-conductor-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/10-conductor-640.jpg"
+                             srcset="assets/shots/10-conductor-640.jpg 640w, assets/shots/10-conductor-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="Boss fight against the Conductor. A ghost in a purple top hat and bow tie waves two batons above the arena, which is drawn as a five-line musical staff with note-shaped projectiles sliding along it. Health reads 53 of 54.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">10</span>
+                        <span class="shot__name">The Conductor</span>
+                        <span class="visually-hidden">— open full size, picture 10 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/11-knight-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="The Knight — arrows from every side, and nowhere that isn't a side.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/11-knight-640.webp 640w, assets/shots/11-knight-1280.webp 1280w, assets/shots/11-knight-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/11-knight-640.jpg"
+                             srcset="assets/shots/11-knight-640.jpg 640w, assets/shots/11-knight-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="Boss fight against the Knight. A small armoured figure stands above the arena while arrows fly inwards from every edge of the screen. Health reads 26 of 45.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">11</span>
+                        <span class="shot__name">The Knight</span>
+                        <span class="visually-hidden">— open full size, picture 11 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/12-ufo-cat-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="UFO Cat Soldier — a green cat with two guns. Nobody explains it.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/12-ufo-cat-640.webp 640w, assets/shots/12-ufo-cat-1280.webp 1280w, assets/shots/12-ufo-cat-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/12-ufo-cat-640.jpg"
+                             srcset="assets/shots/12-ufo-cat-640.jpg 640w, assets/shots/12-ufo-cat-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="Boss fight against the UFO Cat Soldier. A green alien cat in a space helmet holds a gun in each paw and fires bright green bullets across the arena. Health reads 19 of 19.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">12</span>
+                        <span class="shot__name">UFO Cat Soldier</span>
+                        <span class="visually-hidden">— open full size, picture 12 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="shots__cell">
+                <a class="shot" href="assets/shots/13-dance-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="Dance battle — hit the bar on the beat. The floor is watching.">
+                    <picture>
+                        <source type="image/webp"
+                                srcset="assets/shots/13-dance-640.webp 640w, assets/shots/13-dance-1280.webp 1280w, assets/shots/13-dance-1920.webp 1920w"
+                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
+                        <img class="shot__img" src="assets/shots/13-dance-640.jpg"
+                             srcset="assets/shots/13-dance-640.jpg 640w, assets/shots/13-dance-1280.jpg 1280w"
+                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="A dance battle on a glowing purple floor. A big dog in a patterned shirt stands under a spotlight facing BARKO, with a pink timing bar labelled Dance and a moving marker at the bottom of the screen and a green meter down the right side.">
+                    </picture>
+                    <span class="shot__cap">
+                        <span class="shot__no" aria-hidden="true">13</span>
+                        <span class="shot__name">Dance battle</span>
+                        <span class="visually-hidden">— open full size, picture 13 of 13</span>
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- Chi ha appena scorso tredici schermate su un telefono
+             non deve cercare il modulo: glielo diamo qui. Riusa
+             .scroll-cue, che è già alto 44px ed è già disegnato. -->
+        <a class="scroll-cue shots__cue" href="#contact">
+            <span>Write to me</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M12 5v13M6 13l6 6 6-6"/>
+            </svg>
+        </a>
+
+    </section>
+
+
+    <!-- =====================================================
          MESSAGGI
          L'indirizzo di destinazione non compare da nessuna
          parte: FormSubmit lo tiene dietro al codice anonimo
