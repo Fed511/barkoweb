@@ -1574,7 +1574,7 @@ body:has(.viewer[open]) {
    Due sistemazioni, non due elementi:
    - schermo stretto: rientra nella colonna, sotto ai
      pulsanti, e la prima schermata si allunga di conseguenza;
-   - da 1000px in su la colonna si divide in due: il trailer
+   - da 1140px in su la colonna si divide in due: il trailer
      a sinistra, i pulsanti a destra. Affiancarli invece di
      impilarli è ciò che tiene la prima schermata alta esatta-
      mente quanto la finestra, com'era prima del trailer.
@@ -1637,8 +1637,16 @@ body:has(.viewer[open]) {
 
 @media (min-width: 1140px) and (min-height: 561px) {
     .page {
+        /* La colonna si allarga con la finestra per recuperare
+           il margine sinistro vuoto, ma non oltre il punto in
+           cui il bordo destro raggiungerebbe la bambina: da lì
+           in poi resta ferma e il di più torna a essere aria.
+           Il 400px è la sua larghezza più il suo scostamento
+           dal bordo, arrotondati in eccesso. */
+        max-width: min(1400px, calc(100vw - 400px));
+
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1fr) minmax(0, min(560px, 50%));
         align-items: center;
         column-gap: clamp(20px, 3vw, 40px);
     }
@@ -1651,9 +1659,30 @@ body:has(.viewer[open]) {
        Il titolo resta di tutta la larghezza: è l'insegna
        della pagina, non una delle due colonne. */
     .hero       { grid-column: 1 / -1; grid-row: 1; }
-    .trailer    { grid-column: 1; grid-row: 2; max-width: none; }
     .links      { grid-column: 2; grid-row: 2; max-width: none; }
     .scroll-cue { grid-column: 1 / -1; grid-row: 3; justify-self: center; }
+
+    .trailer {
+        grid-column: 1;
+        grid-row: 2;
+
+        /* Il video prende tutta la sua colonna, ma non può
+           crescere oltre l'altezza che avanza: sopra c'è il
+           titolo, sotto l'invito a scorrere, e la prima
+           schermata deve restare una schermata sola. I 620px
+           sono quanto occupa tutto il resto messo in fila,
+           misurati larghi per stare dalla parte sicura.
+
+           I 340px sono il pavimento, e non un valore a caso:
+           finché il video resta più basso della colonna dei
+           pulsanti è la loro altezza a comandare la riga, e
+           allargarlo fin lì non costa niente. Sotto le finestre
+           basse la formula scende sotto il pavimento e vince
+           il pavimento: il video resta della misura che aveva
+           prima, quella già verificata. */
+        max-width: max(340px, min(100%, calc((100vh - 620px) * 16 / 9)));
+        justify-self: start;
+    }
 }
 
 
