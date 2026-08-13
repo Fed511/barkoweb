@@ -1591,14 +1591,22 @@ body:has(.viewer[open]) {
 .trailer__title {
     margin-bottom: 10px;
 
-    font-size: clamp(13px, 1.3vw, 16px);
+    font-size: clamp(14px, 1.4vw, 17px);
     font-weight: normal;
     letter-spacing: 0.06em;
-    line-height: 1;
+    line-height: 1.25;
     text-transform: uppercase;
     text-align: center;
 
-    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
+    /* Il contorno pieno, come il titolo della galleria. La sola
+       ombra in basso a destra qui non basta: la scritta è bianca
+       e sotto ci sono i pastelli chiari, quindi delle lettere
+       resterebbe visibile soltanto l'ombra. */
+    text-shadow:
+        2px 3px 0 rgba(0, 0, 0, 0.9),
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000;
 }
 
 .trailer__frame {
