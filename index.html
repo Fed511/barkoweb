@@ -6,13 +6,18 @@
 
     <!-- Content-Security-Policy: la pagina può caricare risorse solo da
          se stessa e parlare via rete solo con FormSubmit. Niente script
-         inline, niente plugin, niente richieste verso altri host. -->
+         inline, niente plugin, niente richieste verso altri host.
+
+         Unica eccezione: frame-src per il player del trailer. È il solo
+         host esterno ammesso, e solo dentro un <iframe>: non può eseguire
+         script né leggere dati in questa pagina. -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'none';
         script-src 'self';
         style-src 'self';
         img-src 'self' data:;
         font-src 'self';
+        frame-src https://www.youtube-nocookie.com;
         connect-src https://formsubmit.co;
         form-action https://formsubmit.co;
         base-uri 'none';
@@ -139,6 +144,25 @@
             </div>
 
         </nav>
+
+        <!-- Il trailer. Sta dopo i pulsanti nel documento perché su
+             schermo stretto scorre lì sotto, ma da 1360px in su lo
+             stile lo sposta nel margine sinistro: chi legge con la
+             tastiera lo incontra comunque dopo Steam, che resta la
+             destinazione principale. -->
+        <section class="trailer" aria-labelledby="trailer-title">
+
+            <h2 class="trailer__title" id="trailer-title">Watch the trailer</h2>
+
+            <iframe class="trailer__frame"
+                    src="https://www.youtube-nocookie.com/embed/fAtbQNhNuKs?rel=0"
+                    title="BARKO — trailer"
+                    width="560" height="315"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                    allowfullscreen></iframe>
+
+        </section>
 
         <a class="scroll-cue" href="#contact">
             <span>Write to me</span>

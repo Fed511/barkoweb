@@ -1562,3 +1562,99 @@ body:has(.viewer[open]) {
         background-color: rgba(6, 3, 11, 0.92);
     }
 }
+
+
+/* =========================================================
+   TRAILER
+   Il player della prima schermata. Come la galleria, sta in
+   fondo al file e non tocca nessun selettore già esistente:
+   i blocchi @media più in alto (620px, 349px, orizzontale,
+   1600px) non lo raggiungono né vengono raggiunti.
+
+   Due sistemazioni, non due elementi:
+   - schermo stretto: rientra nella colonna, sotto ai
+     pulsanti, e la prima schermata si allunga di conseguenza;
+   - da 1000px in su la colonna si divide in due: il trailer
+     a sinistra, i pulsanti a destra. Affiancarli invece di
+     impilarli è ciò che tiene la prima schermata alta esatta-
+     mente quanto la finestra, com'era prima del trailer.
+   ========================================================= */
+
+.trailer {
+    width: 100%;
+    max-width: 560px;
+
+    /* Come i pulsanti: appiccicato storto sul quaderno. */
+    transform: rotate(-0.8deg);
+}
+
+.trailer__title {
+    margin-bottom: 10px;
+
+    font-size: clamp(13px, 1.3vw, 16px);
+    font-weight: normal;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: center;
+
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
+}
+
+.trailer__frame {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+
+    border: var(--border) solid var(--paper);
+    border-radius: var(--radius);
+
+    /* Il player arriva con qualche istante di ritardo: il nero
+       tiene il posto senza far lampeggiare lo sfondo. */
+    background-color: #000;
+
+    box-shadow: var(--shadow-hard), var(--shadow-soft);
+}
+
+
+/* Prima schermata su due colonne.
+
+   La soglia è 1140px e non meno: sotto, la colonna di destra
+   arriverebbe addosso alla bambina, che sta appoggiata al
+   bordo. Il limite d'altezza tiene questo blocco fuori dai
+   piedi del @media del telefono in orizzontale (max-height
+   560px), che sistema .page a modo suo più in alto nel file:
+   i due intervalli si toccano senza sovrapporsi. */
+
+@media (min-width: 1140px) and (min-height: 561px) {
+    .page {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        column-gap: clamp(20px, 3vw, 40px);
+    }
+
+    /* Riga esplicita su ognuno. Nel documento i pulsanti
+       vengono prima del trailer, e senza queste righe la
+       collocazione automatica li manderebbe su due file
+       diverse invece di affiancarli.
+
+       Il titolo resta di tutta la larghezza: è l'insegna
+       della pagina, non una delle due colonne. */
+    .hero       { grid-column: 1 / -1; grid-row: 1; }
+    .trailer    { grid-column: 1; grid-row: 2; max-width: none; }
+    .links      { grid-column: 2; grid-row: 2; max-width: none; }
+    .scroll-cue { grid-column: 1 / -1; grid-row: 3; justify-self: center; }
+}
+
+
+/* Telefono in orizzontale: la prima schermata è già su due
+   colonne e non ha altezza da regalare. Il trailer resta
+   raggiungibile dal pulsante YouTube. */
+
+@media (max-height: 560px) and (orientation: landscape) {
+    .trailer {
+        display: none;
+    }
+}
