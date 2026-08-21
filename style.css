@@ -1159,6 +1159,85 @@ main {
 }
 
 
+/* =========================================================
+   LA CLIP
+   Girata in verticale col telefono (1080x1920). Sta fuori
+   dalla griglia e tiene la sua forma: dentro una cella 16:9
+   se ne vedrebbe un terzo. Stessa carta, stesso bordo e
+   stesso scotch dei riquadri, cosi' non sembra un corpo
+   estraneo caduto in fondo alla pagina.
+   ========================================================= */
+
+.clip {
+    position: relative;
+
+    width: min(300px, 100%);
+    margin: clamp(22px, 4vh, 38px) auto 0;
+    padding: 10px 10px 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    border: var(--border) solid var(--paper);
+    border-radius: var(--radius);
+
+    background-color: rgba(12, 6, 20, 0.62);
+    box-shadow: var(--shadow-hard), var(--shadow-soft);
+
+    transform: rotate(0.4deg);
+}
+
+/* Lo stesso scotch dei riquadri, con un angolo suo */
+.clip::before,
+.clip::after {
+    content: "";
+
+    position: absolute;
+    top: -9px;
+
+    width: clamp(44px, 20%, 70px);
+    height: 19px;
+
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    background-color: rgba(255, 246, 214, 0.28);
+
+    pointer-events: none;
+}
+
+.clip::before { left: 14px;  transform: rotate(-3.5deg); }
+.clip::after  { right: 14px; transform: rotate(4deg); }
+
+.clip__video {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    /* Il rapporto e' dichiarato qui: il posto e' occupato
+       prima che arrivi l'intestazione del file. */
+    aspect-ratio: 9 / 16;
+
+    border-radius: 9px;
+    background-color: rgba(0, 0, 0, 0.55);
+}
+
+.clip__cap {
+    font-size: clamp(13px, 1.2vw, 15px);
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.65);
+}
+
+@media (prefers-contrast: more) {
+    .clip     { background-color: rgba(12, 6, 20, 0.88); }
+    .clip__cap { color: #ffffff; }
+    .clip::before,
+    .clip::after { display: none; }
+}
+
+
 /* L'invito a scrivere in fondo alla galleria: dopo tredici
    schermate su un telefono il modulo è lontano. */
 
