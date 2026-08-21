@@ -118,7 +118,11 @@
 (function () {
     "use strict";
 
-    var grid = document.getElementById("shots-grid");
+    /* La sezione intera e non la sola griglia: il Placeholder e'
+       verticale e sta fuori dalla griglia, ma deve poter entrare
+       nel visore come tutti gli altri. L'ordine dei riquadri e'
+       quello del documento, quindi resta l'ordine che si vede. */
+    var grid = document.getElementById("shots");
     if (!grid) { return; }
 
     var shots = grid.querySelectorAll("a.shot");

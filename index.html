@@ -182,18 +182,16 @@
 
     <!-- =====================================================
          GALLERIA
-         Dodici schermate 16:9. Ogni riquadro e' soltanto un
+         Undici schermate 16:9, piu' due pezzi verticali sotto. Ogni riquadro e' soltanto un
          link all'immagine grande: senza JavaScript funziona
          lo stesso, il browser la apre in una scheda nuova.
          Con JavaScript app.js costruisce un <dialog> nativo
          e mostra la stessa immagine qui dentro.
 
-         Dodici e non tredici, e nessuna scheda a riga intera:
-         dodici si divide esatto in 4x3, 6x2 e 12x1, quindi
-         nessuna riga resta monca a nessuna larghezza. Se un
-         giorno il numero cambia, o si torna a una scheda
-         .shots__cell--lead o se ne toglie una, in modo che
-         (schede - righe intere) resti divisibile per 3 e per 2.
+         La griglia e' a flex e non a colonne rigide: l'ultima
+         riga incompleta si centra da sola, quindi il numero di
+         schermate non e' piu' un vincolo da ricordare quando se
+         ne aggiunge o se ne toglie una.
          ===================================================== -->
 
     <section class="shots" id="shots" aria-labelledby="shots-title">
@@ -353,129 +351,134 @@
             </li>
 
             <li class="shots__cell">
-                <a class="shot" href="assets/shots/08-placeholder-1080.jpg" target="_blank" rel="noopener"
-                   data-cap="The Placeholder — a boss that is a red rectangle. It wobbles. That is the whole animation.">
+                <a class="shot" href="assets/shots/08-conductor-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="The Conductor — a ghost with a baton, and a stave full of trouble.">
                     <picture>
                         <source type="image/webp"
-                                srcset="assets/shots/08-placeholder-640.webp 640w, assets/shots/08-placeholder-1080.webp 1080w"
+                                srcset="assets/shots/08-conductor-640.webp 640w, assets/shots/08-conductor-1280.webp 1280w, assets/shots/08-conductor-1920.webp 1920w"
                                 sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
-                        <img class="shot__img" src="assets/shots/08-placeholder-640.jpg"
-                             srcset="assets/shots/08-placeholder-640.jpg 640w, assets/shots/08-placeholder-1080.jpg 1080w"
+                        <img class="shot__img" src="assets/shots/08-conductor-640.jpg"
+                             srcset="assets/shots/08-conductor-640.jpg 640w, assets/shots/08-conductor-1280.jpg 1280w"
                              sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
-                             width="1080" height="608" loading="lazy" decoding="async"
-                             alt="A boss fight against a plain red rectangle titled The Placeholder, tilted slightly, floating over a dark grid arena under a full health bar reading thirty-two of thirty-two.">
+                             width="1920" height="1080" loading="lazy" decoding="async"
+                             alt="Boss fight against the Conductor. A ghost in a purple top hat and bow tie waves two batons above the arena, which is drawn as a five-line musical staff with note-shaped projectiles sliding along it. Health reads 53 of 54.">
                     </picture>
                     <span class="shot__cap">
                         <span class="shot__no" aria-hidden="true">08</span>
-                        <span class="shot__name">The Placeholder</span>
+                        <span class="shot__name">The Conductor</span>
                         <span class="visually-hidden">— open full size, picture 8 of 12</span>
                     </span>
                 </a>
             </li>
 
             <li class="shots__cell">
-                <a class="shot" href="assets/shots/09-conductor-1280.jpg" target="_blank" rel="noopener"
-                   data-cap="The Conductor — a ghost with a baton, and a stave full of trouble.">
+                <a class="shot" href="assets/shots/09-knight-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="The Knight — arrows from every side, and nowhere that isn't somewhere.">
                     <picture>
                         <source type="image/webp"
-                                srcset="assets/shots/09-conductor-640.webp 640w, assets/shots/09-conductor-1280.webp 1280w, assets/shots/09-conductor-1920.webp 1920w"
+                                srcset="assets/shots/09-knight-640.webp 640w, assets/shots/09-knight-1280.webp 1280w, assets/shots/09-knight-1920.webp 1920w"
                                 sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
-                        <img class="shot__img" src="assets/shots/09-conductor-640.jpg"
-                             srcset="assets/shots/09-conductor-640.jpg 640w, assets/shots/09-conductor-1280.jpg 1280w"
+                        <img class="shot__img" src="assets/shots/09-knight-640.jpg"
+                             srcset="assets/shots/09-knight-640.jpg 640w, assets/shots/09-knight-1280.jpg 1280w"
                              sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
                              width="1920" height="1080" loading="lazy" decoding="async"
-                             alt="Boss fight against the Conductor. A ghost in a purple top hat and bow tie waves two batons above the arena, which is drawn as a five-line musical staff with note-shaped projectiles sliding along it. Health reads 53 of 54.">
+                             alt="A boss fight against a knight in white armour standing over the arena with the sword up, while crayon arrows fly in from every direction across the dark neon floor.">
                     </picture>
                     <span class="shot__cap">
                         <span class="shot__no" aria-hidden="true">09</span>
-                        <span class="shot__name">The Conductor</span>
+                        <span class="shot__name">The Knight</span>
                         <span class="visually-hidden">— open full size, picture 9 of 12</span>
                     </span>
                 </a>
             </li>
 
             <li class="shots__cell">
-                <a class="shot" href="assets/shots/10-knight-1280.jpg" target="_blank" rel="noopener"
-                   data-cap="The Knight — arrows from every side, and nowhere that isn't somewhere.">
+                <a class="shot" href="assets/shots/10-ufo-cat-1280.jpg" target="_blank" rel="noopener"
+                   data-cap="UFO Cat Soldier — a green cat with two guns. Nobody explains it.">
                     <picture>
                         <source type="image/webp"
-                                srcset="assets/shots/10-knight-640.webp 640w, assets/shots/10-knight-1280.webp 1280w, assets/shots/10-knight-1920.webp 1920w"
+                                srcset="assets/shots/10-ufo-cat-640.webp 640w, assets/shots/10-ufo-cat-1280.webp 1280w, assets/shots/10-ufo-cat-1920.webp 1920w"
                                 sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
-                        <img class="shot__img" src="assets/shots/10-knight-640.jpg"
-                             srcset="assets/shots/10-knight-640.jpg 640w, assets/shots/10-knight-1280.jpg 1280w"
+                        <img class="shot__img" src="assets/shots/10-ufo-cat-640.jpg"
+                             srcset="assets/shots/10-ufo-cat-640.jpg 640w, assets/shots/10-ufo-cat-1280.jpg 1280w"
                              sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
                              width="1920" height="1080" loading="lazy" decoding="async"
-                             alt="A boss fight against a knight in white armour standing over the arena with the sword up, while crayon arrows fly in from every direction across the dark neon floor.">
+                             alt="Boss fight against the UFO Cat Soldier. A green alien cat in a space helmet holds a gun in each paw and fires bright green bullets across the arena. Health reads 19 of 19.">
                     </picture>
                     <span class="shot__cap">
                         <span class="shot__no" aria-hidden="true">10</span>
-                        <span class="shot__name">The Knight</span>
+                        <span class="shot__name">UFO Cat Soldier</span>
                         <span class="visually-hidden">— open full size, picture 10 of 12</span>
                     </span>
                 </a>
             </li>
 
             <li class="shots__cell">
-                <a class="shot" href="assets/shots/11-ufo-cat-1280.jpg" target="_blank" rel="noopener"
-                   data-cap="UFO Cat Soldier — a green cat with two guns. Nobody explains it.">
-                    <picture>
-                        <source type="image/webp"
-                                srcset="assets/shots/11-ufo-cat-640.webp 640w, assets/shots/11-ufo-cat-1280.webp 1280w, assets/shots/11-ufo-cat-1920.webp 1920w"
-                                sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
-                        <img class="shot__img" src="assets/shots/11-ufo-cat-640.jpg"
-                             srcset="assets/shots/11-ufo-cat-640.jpg 640w, assets/shots/11-ufo-cat-1280.jpg 1280w"
-                             sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
-                             width="1920" height="1080" loading="lazy" decoding="async"
-                             alt="Boss fight against the UFO Cat Soldier. A green alien cat in a space helmet holds a gun in each paw and fires bright green bullets across the arena. Health reads 19 of 19.">
-                    </picture>
-                    <span class="shot__cap">
-                        <span class="shot__no" aria-hidden="true">11</span>
-                        <span class="shot__name">UFO Cat Soldier</span>
-                        <span class="visually-hidden">— open full size, picture 11 of 12</span>
-                    </span>
-                </a>
-            </li>
-
-            <li class="shots__cell">
-                <a class="shot" href="assets/shots/12-dance-1280.jpg" target="_blank" rel="noopener"
+                <a class="shot" href="assets/shots/11-dance-1280.jpg" target="_blank" rel="noopener"
                    data-cap="Dance battle — hit the bar on the beat. The floor is watching.">
                     <picture>
                         <source type="image/webp"
-                                srcset="assets/shots/12-dance-640.webp 640w, assets/shots/12-dance-1280.webp 1280w, assets/shots/12-dance-1920.webp 1920w"
+                                srcset="assets/shots/11-dance-640.webp 640w, assets/shots/11-dance-1280.webp 1280w, assets/shots/11-dance-1920.webp 1920w"
                                 sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)">
-                        <img class="shot__img" src="assets/shots/12-dance-640.jpg"
-                             srcset="assets/shots/12-dance-640.jpg 640w, assets/shots/12-dance-1280.jpg 1280w"
+                        <img class="shot__img" src="assets/shots/11-dance-640.jpg"
+                             srcset="assets/shots/11-dance-640.jpg 640w, assets/shots/11-dance-1280.jpg 1280w"
                              sizes="(min-width: 1600px) 372px, (min-width: 901px) 320px, (min-width: 621px) 44vw, calc(100vw - 58px)"
                              width="1920" height="1080" loading="lazy" decoding="async"
                              alt="A dance battle on a glowing purple floor. A big dog in a patterned shirt stands under a spotlight facing BARKO, with a pink timing bar labelled Dance and a moving marker at the bottom of the screen and a green meter down the right side.">
                     </picture>
                     <span class="shot__cap">
-                        <span class="shot__no" aria-hidden="true">12</span>
+                        <span class="shot__no" aria-hidden="true">11</span>
                         <span class="shot__name">Dance battle</span>
-                        <span class="visually-hidden">— open full size, picture 12 of 12</span>
+                        <span class="visually-hidden">— open full size, picture 11 of 12</span>
                     </span>
                 </a>
             </li>
 
         </ul>
 
-        <!-- Il video sta fuori dalla griglia di proposito: e'
-             girato in verticale (1080x1920), e dentro una cella
-             16:9 se ne vedrebbe un terzo. Qui tiene la sua forma.
-             preload="none": da fermo non scarica un byte, gli
-             8,6 MB partono solo se qualcuno preme play. Non c'e'
-             un'immagine di copertina perche' il primo fotogramma
-             del filmato e' quasi nero: per averne una servirebbe
-             estrarre un fotogramma a meta' clip e salvarlo come
-             poster. -->
+        <!-- =====================================================
+             IN FORMATO TELEFONO
+             Due pezzi girati in verticale: la battaglia col
+             Placeholder (1080x1920) e la clip del riporto.
+             Stanno fuori dalla griglia di proposito, perche'
+             dentro una cella 16:9 se ne vedrebbe un terzo.
+             Qui tengono la loro forma e non si taglia niente.
+             ===================================================== -->
 
-        <figure class="clip">
-            <video class="clip__video"
-                   src="assets/shots/fetch-tennisball.mp4"
-                   controls preload="none" playsinline
-                   width="1080" height="1920"></video>
-            <figcaption class="clip__cap">Fetch — eight seconds, and the ball is the point.</figcaption>
-        </figure>
+        <div class="tall">
+
+            <a class="shot shot--tall" href="assets/shots/12-placeholder-1080.jpg" target="_blank" rel="noopener"
+               data-cap="The Placeholder — a boss that is a red rectangle. It wobbles. That is the whole animation.">
+                <picture>
+                    <source type="image/webp"
+                            srcset="assets/shots/12-placeholder-540.webp 540w, assets/shots/12-placeholder-1080.webp 1080w"
+                            sizes="(min-width: 621px) 274px, calc(100vw - 58px)">
+                    <img class="shot__img" src="assets/shots/12-placeholder-540.jpg"
+                         srcset="assets/shots/12-placeholder-540.jpg 540w, assets/shots/12-placeholder-1080.jpg 1080w"
+                         sizes="(min-width: 621px) 274px, calc(100vw - 58px)"
+                         width="1080" height="1920" loading="lazy" decoding="async"
+                         alt="The whole vertical screen of a boss fight against a plain red rectangle titled The Placeholder, with a full health bar reading thirty-two of thirty-two above it and the line: it wobbles, that is the whole animation. Below it ten replies wait in two rows — acknowledge it, look closer, file a bug, show off, give it feedback, offer it something, ask about it, look through it, bark, let it go — over a dark grid arena.">
+                </picture>
+                <span class="shot__cap">
+                    <span class="shot__no" aria-hidden="true">12</span>
+                    <span class="shot__name">The Placeholder</span>
+                    <span class="visually-hidden">— open full size, picture 12 of 12</span>
+                </span>
+            </a>
+
+            <!-- preload="none": da fermo non scarica un byte, gli
+                 8,6 MB partono solo se qualcuno preme play. Non c'e'
+                 un'immagine di copertina perche' il primo fotogramma
+                 del filmato e' quasi nero. -->
+            <figure class="clip">
+                <video class="clip__video"
+                       src="assets/shots/fetch-tennisball.mp4"
+                       controls preload="none" playsinline
+                       width="1080" height="1920"></video>
+                <figcaption class="clip__cap">Fetch — eight seconds, and the ball is the point.</figcaption>
+            </figure>
+
+        </div>
 
         <!-- Chi ha appena scorso dodici schermate su un telefono
              non deve cercare il modulo: glielo diamo qui. Riusa

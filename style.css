@@ -969,11 +969,27 @@ main {
    esatti in 4x3, 6x2 o 12x1. Nessuna riga monca, mai. */
 
 .shots__grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(14px, 2.2vw, 26px);
+    /* Il passo sta in una variabile perche' la larghezza delle
+       schede si calcola da lui: cambiarlo in un @media basta,
+       le schede seguono da sole. */
+    --gap: clamp(14px, 2.2vw, 26px);
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap);
 
     list-style: none;
+}
+
+/* Flex e non Grid: con una griglia rigida l'ultima riga incompleta
+   lascia un buco a destra, e il numero di schermate cambia ogni
+   volta che ne aggiungi o togli una. Cosi' l'ultima riga si centra
+   da sola e il conto non e' piu' un vincolo da ricordare. */
+
+.shots__cell {
+    flex: 0 1 calc((100% - 2 * var(--gap)) / 3);
+    min-width: 0;
 }
 
 /* role="list" nell'HTML serve perché Safari toglie la
@@ -984,7 +1000,7 @@ main {
    colonna implicita e far scorrere la pagina di lato.
    È la trappola classica delle griglie con celle larghe. */
 .shots__cell--lead {
-    grid-column: 1 / -1;
+    flex-basis: 100%;
 }
 
 
@@ -1160,6 +1176,40 @@ main {
 
 
 /* =========================================================
+   IN FORMATO TELEFONO
+   Il Placeholder e la clip sono girati in verticale. Stanno
+   affiancati sotto la griglia e tengono il loro rapporto:
+   dentro una cella 16:9 se ne vedrebbe un terzo.
+   ========================================================= */
+
+.tall {
+    /* Il conto delle colonne di auto-fit usa il MASSIMO del
+       binario: con minmax(260px, 300px) servivano 2x300 piu' il
+       passo, cioe' 614,7px, e a 667px di finestra ne restano 614.
+       Per un pixel andava a capo. Con 1fr il conto usa il minimo,
+       e il tetto di 640px sul contenitore impedisce alle due
+       schede di allontanarsi su uno schermo largo. */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    justify-items: center;
+    align-items: start;
+    gap: clamp(14px, 2.2vw, 26px);
+
+    max-width: 640px;
+    margin: clamp(22px, 4vh, 38px) auto 0;
+}
+
+.shot--tall {
+    width: min(300px, 100%);
+}
+
+/* 9/16 esatto come la sorgente, quindi "cover" non taglia nulla */
+.shot--tall .shot__img {
+    aspect-ratio: 9 / 16;
+}
+
+
+/* =========================================================
    LA CLIP
    Girata in verticale col telefono (1080x1920). Sta fuori
    dalla griglia e tiene la sua forma: dentro una cella 16:9
@@ -1172,7 +1222,7 @@ main {
     position: relative;
 
     width: min(300px, 100%);
-    margin: clamp(22px, 4vh, 38px) auto 0;
+    margin: 0;
     padding: 10px 10px 12px;
 
     display: flex;
@@ -1334,19 +1384,19 @@ main {
     min-height: 0;
 }
 
-.viewer__stage {
-    display: grid;
-    place-items: center;
+/* Flex e non grid, di proposito: con una griglia la riga
+   automatica cresce fino al contenuto, e allora il
+   max-height: 100% dell'immagine si misura sull'altezza gia'
+   cresciuta e non vincola piu' niente. Con un contenitore
+   flex di altezza definita la percentuale si risolve sul
+   valore giusto, e un'immagine verticale resta dentro la
+   finestra invece di sfondarla. */
 
-    width: 100%;
-    height: 100%;
-    min-width: 0;
-    min-height: 0;
-}
-
+.viewer__stage,
 .viewer__stage picture {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     width: 100%;
     height: 100%;
@@ -1359,7 +1409,10 @@ main {
     height: auto;
     max-width: 100%;
     max-height: 100%;
-    aspect-ratio: 16 / 9;
+
+    /* Nessun aspect-ratio imposto: il rapporto arriva dagli
+       attributi width/height dell'immagine clonata. Imporre 16:9
+       qui schiaccerebbe il Placeholder, che e' verticale. */
 
     border: var(--border) solid var(--paper);
     border-radius: var(--radius);
@@ -1468,8 +1521,8 @@ body:has(.viewer[open]) {
    diventano francobolli. La prima resta a riga intera. */
 
 @media (max-width: 900px) {
-    .shots__grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .shots__cell {
+        flex-basis: calc((100% - var(--gap)) / 2);
     }
 }
 
@@ -1483,10 +1536,13 @@ body:has(.viewer[open]) {
     }
 
     .shots__grid {
-        grid-template-columns: minmax(0, 1fr);
         /* 20px e non 14: sotto, lo scotch di un riquadro
            finisce addosso a quello di sopra. */
-        gap: 20px;
+        --gap: 20px;
+    }
+
+    .shots__cell {
+        flex-basis: 100%;
     }
 }
 
@@ -1495,7 +1551,7 @@ body:has(.viewer[open]) {
 
 @media (max-width: 349px) {
     .shots__grid {
-        gap: 18px;
+        --gap: 18px;
     }
 
     .shot {
@@ -1537,7 +1593,7 @@ body:has(.viewer[open]) {
     }
 
     .shots__grid {
-        gap: 14px;
+        --gap: 14px;
     }
 
     .shot {
