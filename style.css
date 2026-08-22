@@ -309,8 +309,14 @@ main {
     animation: bob 3.4s ease-in-out infinite alternate;
 }
 
+/* Il disegno nuovo del cane e' largo e basso (rapporto 1,64
+   contro l'1,11 di prima), quindi alla stessa larghezza si
+   leggeva molto piu' piccolo del logo. Allargarlo non costa
+   niente in verticale: resta comunque piu' basso del logo, e
+   l'altezza del titolo la detta il logo. */
+
 .titlecard__dog img {
-    width: clamp(78px, 15vw, 190px);
+    width: clamp(78px, 20vw, 250px);
     height: auto;
 }
 
@@ -711,7 +717,11 @@ main {
 
 @media (max-width: 620px) {
     body {
-        padding-top: 26px;
+        /* Niente margine sopra: la prima sezione chiede gia'
+           100svh e ha la sua imbottitura, quindi ogni pixel
+           aggiunto qui la fa sforare della stessa misura e
+           spinge l'invito a scorrere sotto il bordo. */
+        padding-top: 0;
         padding-bottom: 26px;
         gap: 22px;
     }
@@ -789,10 +799,17 @@ main {
 }
 
 
-/* Schermi molto grandi: la composizione respira di più */
+/* Schermi molto grandi: la composizione respira di più.
 
-@media (min-width: 1600px) and (min-height: 900px) {
-    .titlecard__dog img  { width: 220px; }
+   La soglia di altezza e' 1150px e non 900: da quando il
+   trailer sta nella prima schermata, le misure maggiorate non
+   ci stanno piu' nemmeno in 1080px di altezza — cioe' sullo
+   schermo piu' diffuso che esista — e l'invito a scorrere
+   finiva sotto il bordo. Sotto questa soglia valgono le
+   misure normali, che ci stanno. */
+
+@media (min-width: 1600px) and (min-height: 1150px) {
+    .titlecard__dog img  { width: 290px; }
     .titlecard__logo img { width: 580px; }
     .tagline             { font-size: 31px; }
     .links               { max-width: 620px; }
@@ -803,7 +820,7 @@ main {
 /* Schermi bassi e larghi (es. laptop 1280×720) */
 
 @media (max-height: 780px) and (min-width: 621px) {
-    .titlecard__dog img { width: clamp(70px, 11vw, 140px); }
+    .titlecard__dog img { width: clamp(70px, 15vw, 190px); }
     .titlecard__logo img { width: clamp(180px, 30vw, 380px); }
     .btn--primary { min-height: 64px; }
     .btn { min-height: 50px; }
@@ -833,7 +850,7 @@ main {
     .links       { grid-column: 2; max-width: none; }
     .scroll-cue  { grid-column: 1 / -1; justify-self: center; }
 
-    .titlecard__dog img  { width: clamp(58px, 8vw, 100px); }
+    .titlecard__dog img  { width: clamp(58px, 11vw, 145px); }
     .titlecard__logo img { width: clamp(150px, 24vw, 290px); }
 
     .tagline {
@@ -851,6 +868,7 @@ main {
 
     .contact { padding-top: 34px; }
 }
+
 
 
 /* =========================================================
@@ -1829,4 +1847,54 @@ body:has(.viewer[open]) {
     .trailer {
         display: none;
     }
+}
+
+
+/* =========================================================
+   TELEFONO IN VERTICALE, POCA ALTEZZA
+   Con il trailer dentro la prima schermata, su un telefono da
+   568px di altezza il conto non torna: titolo, cinque
+   pulsanti, video e invito fanno 713px, e l'invito a scorrere
+   — che e' il pezzo che promette che sotto c'e' altro —
+   finiva sotto il bordo.
+
+   Qui il ritmo verticale si stringe in proporzione all'altezza
+   disponibile invece che a misure fisse: su un telefono piu'
+   alto tutto respira di piu' da solo, senza altri punti di
+   rottura da mantenere.
+
+   Sta in fondo al file di proposito: le regole del trailer e
+   i blocchi @media piu' in alto toccano gli stessi selettori,
+   e a parita' di specificita' vince chi viene dopo.
+   ========================================================= */
+
+@media (max-height: 720px) and (orientation: portrait) {
+
+    .screen {
+        padding: clamp(8px, 1.5vh, 20px) 0 clamp(6px, 1.2vh, 16px);
+    }
+
+    .page {
+        gap: clamp(9px, 1.9vh, 26px);
+    }
+
+    .titlecard__logo img { width: clamp(160px, 32vh, 500px); }
+    .titlecard__dog img  { width: clamp(78px, 16vh, 250px); }
+
+    .tagline {
+        margin-top: clamp(6px, 1.2vh, 14px);
+        padding: 6px 12px;
+        font-size: clamp(12px, 2.3vh, 15px);
+    }
+
+    .links,
+    .links__grid {
+        gap: clamp(7px, 1.4vh, 12px);
+    }
+
+    .btn          { min-height: clamp(44px, 8vh, 52px); }
+    .btn--primary { min-height: clamp(52px, 9.8vh, 66px); }
+
+    .trailer      { max-width: min(100%, 42vh); }
+    .trailer__title { font-size: clamp(12px, 2.2vh, 15px); }
 }
